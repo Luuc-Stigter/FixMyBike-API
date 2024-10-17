@@ -12,6 +12,9 @@ public interface GebruikerRepository extends JpaRepository<Gebruiker, Long> {
     // Zoek gebruikers op basis van hun rol
     List<Gebruiker> findByRole(Role role);
 
-    // Zoek gebruikers op basis van hun naam (optioneel)
+    // Zoek gebruikers op basis van hun naam
     List<Gebruiker> findByNaamContaining(String naam);
+
+    // Zoek gebruiker op basis van zijn/haar naam
+    Gebruiker findByNaam(String naam);
 }

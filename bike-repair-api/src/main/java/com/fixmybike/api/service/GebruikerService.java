@@ -44,10 +44,8 @@ public class GebruikerService {
         return gebruikerRepository.findByRole(role);
     }
 
-    // Zoek gebruiker op basis van exacte naam
+    // Zoek gebruiker op basis van zijn/haar naam
     public Gebruiker zoekGebruikerOpNaam(String naam) {
-        return gebruikerRepository.findByNaam(naam)
-                .orElseThrow(() -> new RuntimeException("Gebruiker niet gevonden met naam: " + naam));
+        return gebruikerRepository.findByNaam(naam);
     }
-
 }
