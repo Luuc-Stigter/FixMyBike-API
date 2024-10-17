@@ -24,13 +24,13 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/auth/login").permitAll()
-                        .requestMatchers("/api/gebruikers/**").hasAnyRole("FIETSTECHNICUS", "BALIEPERSOON", "VOORRAADBEHEERDER")
-                        .requestMatchers("/api/fietsen/**").hasRole("BALIEPERSOON")
-                        .requestMatchers("/api/reparaties/**").hasRole("FIETSTECHNICUS")
-                        .requestMatchers("/api/onderdelen/**").hasRole("VOORRAADBEHEERDER")
+                        .requestMatchers("/api/gebruikers/**").hasAnyAuthority("FIETSTECHNICUS", "BALIEPERSOON", "VOORRAADBEHEERDER")
+                        .requestMatchers("/api/fietsen/**").hasAuthority("BALIEPERSOON")
+                        .requestMatchers("/api/reparaties/**").hasAuthority("FIETSTECHNICUS")
+                        .requestMatchers("/api/onderdelen/**").hasAuthority("VOORRAADBEHEERDER")
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
