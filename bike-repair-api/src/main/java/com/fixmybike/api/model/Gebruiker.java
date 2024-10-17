@@ -2,6 +2,7 @@ package com.fixmybike.api.model;
 
 import jakarta.persistence.*;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Gebruiker {
@@ -20,6 +21,7 @@ public class Gebruiker {
     private String wachtwoord;
 
     @OneToMany(mappedBy = "gebruiker")
+    @JsonIgnore
     private List<Fiets> fietsen;
 
     // Getters en setters

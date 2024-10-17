@@ -73,5 +73,4 @@ public class GebruikerController {
         Gebruiker gebruiker = gebruikerService.zoekGebruikerOpNaam(naam);
         return ResponseEntity.ok(gebruiker);
     }
-
 }

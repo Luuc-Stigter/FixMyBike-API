@@ -2,6 +2,7 @@ package com.fixmybike.api.model;
 
 import jakarta.persistence.*;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Fiets {
@@ -15,6 +16,7 @@ public class Fiets {
 
     @ManyToOne
     @JoinColumn(name = "gebruiker_id")
+    @JsonIgnore
     private Gebruiker gebruiker;
 
     @OneToMany(mappedBy = "fiets")
