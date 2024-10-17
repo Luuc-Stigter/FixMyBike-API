@@ -9,9 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -24,15 +21,9 @@ public class AuthController {
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    private Set<String> activeTokens = new HashSet<>();
-
+    // Endpoint voor inloggen
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String naam, @RequestParam String wachtwoord, @RequestHeader(value = "Authorization", required = false) String authorizationHeader) {
-        // Check if the user is already logged in
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Er is al een gebruiker ingelogd.");
-        }
-
+    public ResponseEntity<String> login(@RequestParam String naam, @RequestParam String wachtwoord) {
         Gebruiker gebruiker = gebruikerService.zoekGebruikerOpNaam(naam);
         if (gebruiker == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Gebruiker niet gevonden");
@@ -40,21 +31,10 @@ public class AuthController {
 
         if (passwordEncoder.matches(wachtwoord, gebruiker.getWachtwoord())) {
             String token = jwtUtil.generateToken(gebruiker.getNaam());
-            activeTokens.add(token); // Store the token in the active tokens set
             return ResponseEntity.ok(token);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Ongeldig wachtwoord");
         }
-    }
-
-    @PostMapping("/logout")
-    public ResponseEntity<String> logout(@RequestHeader(value = "Authorization") String authorizationHeader) {
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            String token = authorizationHeader.substring(7);
-            activeTokens.remove(token); // Remove the token from the active tokens set
-            return ResponseEntity.ok("Succesvol uitgelogd.");
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Geen geldige token gevonden.");
     }
 
     @PostMapping("/register")
@@ -65,5 +45,10 @@ public class AuthController {
         // Sla de gebruiker op
         Gebruiker opgeslagenGebruiker = gebruikerService.saveGebruiker(gebruiker);
         return ResponseEntity.status(HttpStatus.CREATED).body(opgeslagenGebruiker);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout() {
+        return ResponseEntity.ok("U bent succesvol uitgelogd. Verwijder de token van de client.");
     }
 }
