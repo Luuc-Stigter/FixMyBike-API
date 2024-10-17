@@ -13,16 +13,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable() // Disable CSRF protection for easier testing
+                .csrf().disable()
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/auth/login").permitAll() // Allow all users to access the login endpoint
-                        .requestMatchers("/api/gebruikers/**").hasAnyRole("FIETSTECHNICUS", "BALIEPERSOON", "VOORRAADBEHEERDER") // Allow access to user management for all roles
-                        .requestMatchers("/api/fietsen/**").hasRole("BALIEPERSOON") // Allow Baliepersoneel to access bike registration
-                        .requestMatchers("/api/reparaties/**").hasRole("FIETSTECHNICUS") // Allow Fietstechnicus to manage repairs
-                        .requestMatchers("/api/onderdelen/**").hasRole("VOORRAADBEHEERDER") // Allow Voorraadbeheerder to manage parts
-                        .anyRequest().authenticated() // Require authentication for any other request
+                        .requestMatchers("/api/auth/login").permitAll()
+                        .requestMatchers("/api/gebruikers/**").hasAnyRole("FIETSTECHNICUS", "BALIEPERSOON", "VOORRAADBEHEERDER")
+                        .requestMatchers("/api/fietsen/**").hasRole("BALIEPERSOON")
+                        .requestMatchers("/api/reparaties/**").hasRole("FIETSTECHNICUS")
+                        .requestMatchers("/api/onderdelen/**").hasRole("VOORRAADBEHEERDER")
+                        .anyRequest().authenticated()
                 )
-                .httpBasic(); // Enable basic HTTP authentication
+                .httpBasic();
 
         return http.build();
     }
