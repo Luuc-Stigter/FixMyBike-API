@@ -67,10 +67,11 @@ public class GebruikerController {
         return ResponseEntity.ok(gebruikers);
     }
 
-    // Endpoint om gebruikers op naam te zoeken
+    // Endpoint om gebruiker op naam te zoeken
     @GetMapping("/search")
-    public ResponseEntity<List<Gebruiker>> searchGebruikers(@RequestParam String naam) {
-        List<Gebruiker> gebruikers = gebruikerService.zoekGebruikersOpNaam(naam);
-        return ResponseEntity.ok(gebruikers);
+    public ResponseEntity<Gebruiker> searchGebruiker(@RequestParam String naam) {
+        Gebruiker gebruiker = gebruikerService.zoekGebruikerOpNaam(naam);
+        return ResponseEntity.ok(gebruiker);
     }
+
 }
