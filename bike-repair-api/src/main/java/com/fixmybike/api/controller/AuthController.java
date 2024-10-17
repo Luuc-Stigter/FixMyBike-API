@@ -2,6 +2,7 @@ package com.fixmybike.api.controller;
 
 import com.fixmybike.api.model.Gebruiker;
 import com.fixmybike.api.service.GebruikerService;
+import com.fixmybike.api.util.JwtUtil; // Import JwtUtil
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,26 +16,27 @@ public class AuthController {
     @Autowired
     private GebruikerService gebruikerService;
 
+    @Autowired
+    private JwtUtil jwtUtil; // Add this line to inject JwtUtil
+
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     // Endpoint voor inloggen
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestParam String naam, @RequestParam String wachtwoord) {
-        // Zoek gebruiker op naam
         Gebruiker gebruiker = gebruikerService.zoekGebruikerOpNaam(naam);
         if (gebruiker == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Gebruiker niet gevonden");
         }
 
-        // Valideer het wachtwoord
         if (passwordEncoder.matches(wachtwoord, gebruiker.getWachtwoord())) {
-            return ResponseEntity.ok("Inloggen geslaagd");
+            String token = jwtUtil.generateToken(gebruiker.getNaam());
+            return ResponseEntity.ok(token);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Ongeldig wachtwoord");
         }
     }
 
-    // Endpoint voor registratie (optioneel)
     @PostMapping("/register")
     public ResponseEntity<Gebruiker> register(@RequestBody Gebruiker gebruiker) {
         // Versleutel het wachtwoord
