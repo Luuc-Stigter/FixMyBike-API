@@ -32,5 +32,59 @@ public class Reparatie {
     )
     private List<Onderdeel> onderdelen;
 
-    // Getters en setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getDatum() {
+        return datum;
+    }
+
+    public void setDatum(LocalDateTime datum) {
+        this.datum = datum;
+    }
+
+    public Fiets getFiets() {
+        return fiets;
+    }
+
+    public void setFiets(Fiets fiets) {
+        this.fiets = fiets;
+    }
+
+    public Gebruiker getTechnicus() {
+        return technicus;
+    }
+
+    public void setTechnicus(Gebruiker technicus) {
+        this.technicus = technicus;
+    }
+
+    public Factuur getFactuur() {
+        return factuur;
+    }
+
+    public void setFactuur(Factuur factuur) {
+        this.factuur = factuur;
+    }
+
+    public List<Onderdeel> getOnderdelen() {
+        return onderdelen;
+    }
+
+    public void setOnderdelen(List<Onderdeel> onderdelen) {
+        this.onderdelen = onderdelen;
+    }
 }

@@ -20,5 +20,51 @@ public class Fiets {
     @OneToMany(mappedBy = "fiets")
     private List<Reparatie> reparaties;
 
-    // Getters en setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getMerk() {
+        return merk;
+    }
+
+    public void setMerk(String merk) {
+        this.merk = merk;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getSerienummer() {
+        return serienummer;
+    }
+
+    public void setSerienummer(String serienummer) {
+        this.serienummer = serienummer;
+    }
+
+    public Gebruiker getGebruiker() {
+        return gebruiker;
+    }
+
+    public void setGebruiker(Gebruiker gebruiker) {
+        this.gebruiker = gebruiker;
+    }
+
+    public List<Reparatie> getReparaties() {
+        return reparaties;
+    }
+
+    public void setReparaties(List<Reparatie> reparaties) {
+        this.reparaties = reparaties;
+    }
 }

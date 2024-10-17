@@ -16,5 +16,43 @@ public class Onderdeel {
     @ManyToMany(mappedBy = "onderdelen")
     private List<Reparatie> reparaties;
 
-    // Getters en setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    public Float getPrijs() {
+        return prijs;
+    }
+
+    public void setPrijs(Float prijs) {
+        this.prijs = prijs;
+    }
+
+    public int getVoorraad() {
+        return voorraad;
+    }
+
+    public void setVoorraad(int voorraad) {
+        this.voorraad = voorraad;
+    }
+
+    public List<Reparatie> getReparaties() {
+        return reparaties;
+    }
+
+    public void setReparaties(List<Reparatie> reparaties) {
+        this.reparaties = reparaties;
+    }
 }
