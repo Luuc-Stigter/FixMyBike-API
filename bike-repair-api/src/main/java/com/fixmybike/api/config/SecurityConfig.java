@@ -24,10 +24,10 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/auth/login").permitAll()
-                        .requestMatchers("/api/gebruikers/**").hasAnyAuthority("FIETSTECHNICUS", "BALIEPERSOON", "VOORRAADBEHEERDER")
-                        .requestMatchers("/api/fietsen/**").hasAuthority("BALIEPERSOON")
-                        .requestMatchers("/api/reparaties/**").hasAuthority("FIETSTECHNICUS")
-                        .requestMatchers("/api/onderdelen/**").hasAuthority("VOORRAADBEHEERDER")
+                        .requestMatchers("/api/gebruikers/**").hasAnyRole("FIETSTECHNICUS", "BALIEPERSONEEL", "VOORRAADBEHEERDER")
+                        .requestMatchers("/api/fietsen/**").hasRole("BALIEPERSONEEL")
+                        .requestMatchers("/api/reparaties/**").hasRole("FIETSTECHNICUS")
+                        .requestMatchers("/api/onderdelen/**").hasRole("VOORRAADBEHEERDER")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
