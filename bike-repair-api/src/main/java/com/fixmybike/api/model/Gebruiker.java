@@ -5,6 +5,7 @@ import java.util.List;
 
 @Entity
 public class Gebruiker {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,9 +17,12 @@ public class Gebruiker {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private String wachtwoord;
+
     @OneToMany(mappedBy = "gebruiker")
     private List<Fiets> fietsen;
 
+    // Getters en setters
     public Long getId() {
         return id;
     }
@@ -57,6 +61,14 @@ public class Gebruiker {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getWachtwoord() {
+        return wachtwoord;
+    }
+
+    public void setWachtwoord(String wachtwoord) {
+        this.wachtwoord = wachtwoord;
     }
 
     public List<Fiets> getFietsen() {
