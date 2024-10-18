@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -30,7 +32,8 @@ public class AuthController {
         }
 
         if (passwordEncoder.matches(wachtwoord, gebruiker.getWachtwoord())) {
-            String token = jwtUtil.generateToken(gebruiker.getNaam());
+            // Generate token with user role
+            String token = jwtUtil.generateToken(gebruiker.getNaam(), Collections.singletonList(gebruiker.getRole().name()));
             return ResponseEntity.ok(token);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Ongeldig wachtwoord");
@@ -45,10 +48,5 @@ public class AuthController {
         // Sla de gebruiker op
         Gebruiker opgeslagenGebruiker = gebruikerService.saveGebruiker(gebruiker);
         return ResponseEntity.status(HttpStatus.CREATED).body(opgeslagenGebruiker);
-    }
-
-    @PostMapping("/logout")
-    public ResponseEntity<String> logout() {
-        return ResponseEntity.ok("U bent succesvol uitgelogd. Verwijder de token van de client.");
     }
 }
