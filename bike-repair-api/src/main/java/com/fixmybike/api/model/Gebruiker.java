@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Gebruiker {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

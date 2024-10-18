@@ -1,5 +1,7 @@
 package com.fixmybike.api.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,6 +17,7 @@ public class Reparatie {
 
     @ManyToOne
     @JoinColumn(name = "fiets_id")
+    @JsonBackReference
     private Fiets fiets;
 
     @ManyToOne
@@ -22,6 +25,7 @@ public class Reparatie {
     private Gebruiker technicus;
 
     @OneToOne(mappedBy = "reparatie", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Factuur factuur;
 
     @ManyToMany

@@ -1,5 +1,6 @@
 package com.fixmybike.api.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +14,7 @@ public class Factuur {
 
     @OneToOne
     @JoinColumn(name = "reparatie_id")
+    @JsonBackReference
     private Reparatie reparatie;
 
     public Long getId() {

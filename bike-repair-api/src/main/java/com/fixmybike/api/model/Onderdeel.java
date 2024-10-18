@@ -1,5 +1,6 @@
 package com.fixmybike.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class Onderdeel {
     private int voorraad;
 
     @ManyToMany(mappedBy = "onderdelen")
+    @JsonIgnore
     private List<Reparatie> reparaties;
 
     public Long getId() {

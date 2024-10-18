@@ -1,5 +1,6 @@
 package com.fixmybike.api.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,6 +21,7 @@ public class Fiets {
     private Gebruiker gebruiker;
 
     @OneToMany(mappedBy = "fiets")
+    @JsonManagedReference
     private List<Reparatie> reparaties;
 
     public Long getId() {
