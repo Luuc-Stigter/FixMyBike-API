@@ -32,7 +32,6 @@ public class AuthController {
         }
 
         if (passwordEncoder.matches(wachtwoord, gebruiker.getWachtwoord())) {
-            // Generate token with user role
             String token = jwtUtil.generateToken(gebruiker.getNaam(), Collections.singletonList(gebruiker.getRole().name()));
             return ResponseEntity.ok(token);
         } else {

@@ -14,7 +14,6 @@ public class FietsService {
     private FietsRepository fietsRepository;
 
     public Fiets registerFiets(Fiets fiets) {
-        // Logica voor fietsregistratie, zoals validatie
         return fietsRepository.save(fiets);
     }
 
@@ -22,5 +21,7 @@ public class FietsService {
         return fietsRepository.findAll();
     }
 
-    // Voeg meer methoden toe indien nodig
+    public Fiets getFietsById(Long fietsId) {
+        return fietsRepository.findById(fietsId).orElse(null);
+    }
 }

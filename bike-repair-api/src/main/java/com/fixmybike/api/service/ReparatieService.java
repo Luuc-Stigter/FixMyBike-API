@@ -14,7 +14,6 @@ public class ReparatieService {
     private ReparatieRepository reparatieRepository;
 
     public Reparatie addReparatie(Reparatie reparatie) {
-        // Logica voor het toevoegen van een reparatie
         return reparatieRepository.save(reparatie);
     }
 
@@ -22,5 +21,7 @@ public class ReparatieService {
         return reparatieRepository.findAll();
     }
 
-    // Voeg meer methoden toe indien nodig
+    public Reparatie scheduleKeuring(Reparatie reparatie) {
+        return reparatieRepository.save(reparatie);
+    }
 }

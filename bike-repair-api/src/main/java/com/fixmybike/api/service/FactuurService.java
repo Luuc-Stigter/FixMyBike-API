@@ -14,13 +14,10 @@ public class FactuurService {
     private FactuurRepository factuurRepository;
 
     public Factuur generateFactuur(Factuur factuur) {
-        // Logica voor het genereren van een factuur
         return factuurRepository.save(factuur);
     }
 
     public List<Factuur> getAllFacturen() {
         return factuurRepository.findAll();
     }
-
-    // Voeg meer methoden toe indien nodig
 }
